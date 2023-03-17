@@ -1,0 +1,412 @@
+<robot name="ergoCub">
+
+  <link name="root_link"/>
+
+  <joint name="base_link_fixed_joint" type="fixed">
+     <origin xyz="0 0 0.1" rpy="3.14 -1.57 0"/>
+     <axis xyz="0 0 0"/>
+     <parent link="root_link"/>
+     <child link="l_hand_palm"/>
+  </joint>
+
+  <link name="l_hand_palm">
+    <inertial>
+      <origin xyz="-0.0034640807528164147 0.0026595088100320463 -0.059159070432414085" rpy="0.12008501986317731 0.2297882840735942 1.8533146530335884"/>
+      <mass value="0.193024"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.025778568952600042 -0.2002603076921135 0.22682584341786538" rpy="0.12008501986317731 0.2297882840735942 1.8533146530335884"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_palm_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="cyan">
+        <color rgba="0 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.025778568952600042 -0.2002603076921135 0.22682584341786538" rpy="0.12008501986317731 0.2297882840735942 1.8533146530335884"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_palm_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+
+  <link name="l_hand_ring_1">
+    <inertial>
+      <origin xyz="0.00014280339169172197 0.0036426704125520626 -0.014331537616628587" rpy="0.03293841693450851 0.2510502277214382 1.8063707999903837"/>
+      <mass value="0.00345703"/>
+      <inertia ixx="0.01" ixy="-2.00998e-09" ixz="5.85772e-08" iyy="0.01" iyz="-2.27607e-09" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.007549845505752852 -0.19942057587455292 0.32662722703398567" rpy="0.03293841693450851 0.2510502277214382 1.8063707999903837"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_ring_1_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.007549845505752852 -0.19942057587455292 0.32662722703398567" rpy="0.03293841693450851 0.2510502277214382 1.8063707999903837"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_ring_1_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_ring_prox" type="revolute">
+    <origin xyz="-0.015417865717831492 -0.0018501027039076468 -0.09790043518642755" rpy="0 0.08726650590388031 0.026179823381597748"/>
+    <axis xyz="-1.0000005135466863 -1.979209419246744e-07 -4.060128685548503e-07"/>
+    <parent link="l_hand_palm"/>
+    <child link="l_hand_ring_1"/>
+    <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+  <link name="l_hand_ring_2">
+    <inertial>
+      <origin xyz="5.158639613811293e-05 0.0015996223776358065 -0.003590597740307344" rpy="0.03293841693450851 0.2510502277214382 1.8063707999903837"/>
+      <mass value="0.00912524"/>
+      <inertia ixx="0.01" ixy="4.76252e-08" ixz="9.4436e-07" iyy="0.01" iyz="-1.39679e-07" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.007549803385393823 -0.1979206552730235 0.35662779114530463" rpy="0.03293841693450851 0.2510502277214382 1.8063707999903837"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_ring_2_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="white">
+        <color rgba="1 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.007549803385393823 -0.1979206552730235 0.35662779114530463" rpy="0.03293841693450851 0.2510502277214382 1.8063707999903837"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_ring_2_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_ring_dist" type="revolute">
+    <origin xyz="0 -0.0014999206015293143 -0.03000056411131863" rpy="0 0 0"/>
+    <axis xyz="-1.0000005135466863 -1.979209419246744e-07 -4.060128685548503e-07"/>
+    <parent link="l_hand_ring_1"/>
+    <child link="l_hand_ring_2"/>
+    <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <link name="l_hand_index_1">
+    <inertial>
+      <origin xyz="0.008775274459774315 0.004269452512144861 -0.017750570367235263" rpy="0.20567444929844825 0.20467244819585653 1.8717733650332327"/>
+      <mass value="0.0183891"/>
+      <inertia ixx="0.01" ixy="9.87525e-08" ixz="6.73219e-08" iyy="0.01" iyz="-4.87291e-07" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.02904319388181435 -0.19871027157305793 0.2940034586718241" rpy="0.20567444929844825 0.20467244819585653 1.8717733650332327"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_index_1_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="dblue">
+        <color rgba="0 0 0.8 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.02904319388181435 -0.19871027157305793 0.2940034586718241" rpy="0.20567444929844825 0.20467244819585653 1.8717733650332327"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_index_1_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_index_add" type="revolute">
+    <origin xyz="0.022469969224748403 -0.001550029846802109 -0.06859012009285947" rpy="0 -0.08726657030232389 2.273729335436677e-07"/>
+    <axis xyz="-3.992524267790176e-07 -0.999999978353397 -2.1441989261905547e-07"/>
+    <parent link="l_hand_palm"/>
+    <child link="l_hand_index_1"/>
+    <limit effort="50000" lower="0.0" upper="0.3490658503988659" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+  <link name="l_hand_index_2">
+    <inertial>
+      <origin xyz="0.00014299124504029564 0.003642127156679803 -0.014330898644830947" rpy="0.20567444929844825 0.20467244819585653 1.8717733650332327"/>
+      <mass value="0.00345703"/>
+      <inertia ixx="0.01" ixy="5.70823e-09" ixz="4.71528e-08" iyy="0.01" iyz="-4.56705e-08" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.019850644138777407 -0.19871010849351842 0.3247170818738366" rpy="0.20567444929844825 0.20467244819585653 1.8717733650332327"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_index_2_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="dgreen">
+        <color rgba="0.1 0.8 0.1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.019850644138777407 -0.19871010849351842 0.3247170818738366" rpy="0.20567444929844825 0.20467244819585653 1.8717733650332327"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_index_2_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_index_prox" type="revolute">
+    <origin xyz="0.009192549743036973 -1.6307953948357934e-07 -0.030713623202012375" rpy="0 0 0"/>
+    <axis xyz="-0.9999995872902697 2.6872936789712476e-07 -4.668360350512657e-07"/>
+    <parent link="l_hand_index_1"/>
+    <child link="l_hand_index_2"/>
+    <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+  <link name="l_hand_index_3">
+    <inertial>
+      <origin xyz="5.9109449817802695e-05 0.0016001193440265127 -0.003591033160222079" rpy="0.20567444929844825 0.20467244819585653 1.8717733650332327"/>
+      <mass value="0.00912524"/>
+      <inertia ixx="0.01" ixy="1.8521e-07" ixz="7.98775e-07" iyy="0.01" iyz="-6.45784e-07" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.019850732699259722 -0.19720947570560032 0.35471630507241264" rpy="0.20567444929844825 0.20467244819585653 1.8717733650332327"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_index_3_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="gray">
+        <color rgba="0.5 0.5 0.5 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.019850732699259722 -0.19720947570560032 0.35471630507241264" rpy="0.20567444929844825 0.20467244819585653 1.8717733650332327"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_index_3_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_index_dist" type="revolute">
+    <origin xyz="0 -0.0015006327879180659 -0.02999922319857601" rpy="0 0 0"/>
+    <axis xyz="-0.9999995872902697 2.6872936789712476e-07 -4.668360350512657e-07"/>
+    <parent link="l_hand_index_2"/>
+    <child link="l_hand_index_3"/>
+    <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <link name="l_hand_middle_1">
+    <inertial>
+      <origin xyz="0.0001426788707961056 0.003642823793353789 -0.014331376909090254" rpy="0.12008501986317731 0.2297882840735942 1.8533146530335884"/>
+      <mass value="0.00345703"/>
+      <inertia ixx="0.01" ixy="2.33291e-09" ixz="5.3584e-08" iyy="0.01" iyz="-2.42237e-08" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.01617835428392994 -0.19875945050109686 0.32982571996156645" rpy="0.12008501986317731 0.2297882840735942 1.8533146530335884"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_middle_1_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="green">
+        <color rgba="0 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.01617835428392994 -0.19875945050109686 0.32982571996156645" rpy="0.12008501986317731 0.2297882840735942 1.8533146530335884"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_middle_1_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_middle_prox" type="revolute">
+    <origin xyz="0.009600214668670098 -0.0015008571910165858 -0.10299987654370085" rpy="0 0 0"/>
+    <axis xyz="-0.9999998262416893 -3.56920377206707e-07 -2.721582535170075e-07"/>
+    <parent link="l_hand_palm"/>
+    <child link="l_hand_middle_1"/>
+    <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+  <link name="l_hand_middle_2">
+    <inertial>
+      <origin xyz="5.172124499746439e-05 0.0015996341583800477 -0.003590479003163727" rpy="0.11954926259843997 0.22799029281164018 1.8531928341958708"/>
+      <mass value="0.00912524"/>
+      <inertia ixx="0.01" ixy="1.239e-07" ixz="0.01" iyy="3.41731e-06" iyz="-3.99253e-07" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.016178446836467256 -0.19793324107587792 0.3594559877864297" rpy="0.11954926259843997 0.22799029281164018 1.8531928341958708"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_middle_2_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="black">
+        <color rgba="0 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.016178446836467256 -0.19793324107587792 0.3594559877864297" rpy="0.11954926259843997 0.22799029281164018 1.8531928341958708"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_middle_2_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_middle_dist" type="revolute">
+    <origin xyz="-1.3550151000546462e-07 -0.0014995238274964628 -0.03000020325318492" rpy="-0.0018721728628663644 0 2.576685250299645e-07"/>
+    <axis xyz="-0.9999998262417538 -9.878318872787173e-08 -2.5044776373606137e-07"/>
+    <parent link="l_hand_middle_1"/>
+    <child link="l_hand_middle_2"/>
+    <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <link name="l_hand_thumb_1">
+    <inertial>
+      <origin xyz="0.020687992873158395 0.003255220723100055 -0.008896940067464165" rpy="0.3407559733652857 0.16157290397540883 2.2910827715586013"/>
+      <mass value="0.0346205"/>
+      <inertia ixx="0.01" ixy="-2.06718e-06" ixz="-4.99381e-07" iyy="0.01" iyz="-2.5225e-06" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.1322803583541615 -0.15858996430408137 0.2541102113185044" rpy="0.3407559733652857 0.16157290397540883 2.2910827715586013"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_thumb_1_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="red">
+        <color rgba="1 0 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.1322803583541615 -0.15858996430408137 0.2541102113185044" rpy="0.3407559733652857 0.16157290397540883 2.2910827715586013"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_thumb_1_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_thumb_add" type="revolute">
+    <origin xyz="0.023374937816838005 -0.003000071417791822 -0.034523522800941175" rpy="0.08853717963934662 -0.2091803673917457 -0.40396882311318977"/>
+    <axis xyz="-9.579078130705909e-08 6.90101362721407e-08 -1.0000003967894144"/>
+    <parent link="l_hand_palm"/>
+    <child link="l_hand_thumb_1"/>
+    <limit effort="50000" lower="0.0" upper="1.0471975511965976" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+  <link name="l_hand_thumb_2">
+    <inertial>
+      <origin xyz="0.009791991208288692 0.004339703993751859 0.0002629570752250565" rpy="1.836586646685542 0.9949596465626955 -2.452146247302006"/>
+      <mass value="0.00246082"/>
+      <inertia ixx="0.01" ixy="-1.15428e-08" ixz="-1.55154e-08" iyy="0.01" iyz="-2.43359e-08" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.09215234480058533 0.2395110056057534 0.21989844725116847" rpy="1.836586646685542 0.9949596465626955 -2.452146247302006"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_thumb_2_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="blue">
+        <color rgba="0 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.09215234480058533 0.2395110056057534 0.21989844725116847" rpy="1.836586646685542 0.9949596465626955 -2.452146247302006"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_thumb_2_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_thumb_prox" type="revolute">
+    <origin xyz="0.03454190438141733 0.0031447987794122334 -0.026071809138455138" rpy="1.3486854426081958 0.6514100961972398 1.2371890149379312e-06"/>
+    <axis xyz="6.65068723482154e-07 -2.7824760159833595e-07 -1.0000002266902146"/>
+    <parent link="l_hand_thumb_1"/>
+    <child link="l_hand_thumb_2"/>
+    <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+  <link name="l_hand_thumb_3">
+    <inertial>
+      <origin xyz="0.006464657686845246 0.001884491656128695 1.5530289565829358e-05" rpy="1.836586646685542 0.9949596465626955 -2.452146247302006"/>
+      <mass value="0.00811336"/>
+      <inertia ixx="0.01" ixy="-6.71818e-07" ixz="-3.37336e-07" iyy="0.01" iyz="-6.24005e-07" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.11215186322773268 0.24101052770139572 0.21989803874896846" rpy="1.836586646685542 0.9949596465626955 -2.452146247302006"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_thumb_3_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="yellow">
+        <color rgba="1 1 0 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="-0.11215186322773268 0.24101052770139572 0.21989803874896846" rpy="1.836586646685542 0.9949596465626955 -2.452146247302006"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_thumb_3_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_thumb_dist" type="revolute">
+    <origin xyz="0.01999951842714734 -0.0014995220956423305 4.0850220001109605e-07" rpy="0 0 0"/>
+    <axis xyz="6.65068723482154e-07 -2.7824760159833595e-07 -1.0000002266902146"/>
+    <parent link="l_hand_thumb_2"/>
+    <child link="l_hand_thumb_3"/>
+    <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <link name="l_hand_pinkie_1">
+    <inertial>
+      <origin xyz="0.00012075789444785517 0.003704897193364143 -0.011966220252340787" rpy="0.03293841693450851 0.2510502277214382 1.8063707999903837"/>
+      <mass value="0.00283627"/>
+      <inertia ixx="0.01" ixy="-2.91649e-09" ixz="3.31954e-08" iyy="0.01" iyz="-2.28393e-09" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.028549811623539312 -0.19942048890787537 0.3226271900836232" rpy="0.03293841693450851 0.2510502277214382 1.8063707999903837"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_pinkie_1_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="pink">
+        <color rgba="1 0 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.028549811623539312 -0.19942048890787537 0.3226271900836232" rpy="0.03293841693450851 0.2510502277214382 1.8063707999903837"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_pinkie_1_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_pinkie_prox" type="revolute">
+    <origin xyz="-0.03598224264195511 -0.002388684875026248 -0.09208535104881393" rpy="0 0.08726650590388031 0.026179823381597748"/>
+    <axis xyz="-1.0000005135466863 -1.979209419246744e-07 -4.060128685548503e-07"/>
+    <parent link="l_hand_palm"/>
+    <child link="l_hand_pinkie_1"/>
+    <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+  <link name="l_hand_pinkie_2">
+    <inertial>
+      <origin xyz="1.712559800553376e-05 0.0017852152950040279 -0.005612274232820069" rpy="0.03294759939428343 0.25108473598814396 1.806373605758749"/>
+      <mass value="0.00857923"/>
+      <inertia ixx="0.01" ixy="3.5901e-08" ixz="7.27944e-07" iyy="0.01" iyz="-1.07962e-07" izz="0.01"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.0285502106092587 -0.1979083365759431 0.3476344574461948" rpy="0.03294759939428343 0.25108473598814396 1.806373605758749"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_pinkie_2_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+      <material name="cyan">
+        <color rgba="0 1 1 1"/>
+      </material>
+    </visual>
+    <collision>
+      <origin xyz="0.0285502106092587 -0.1979083365759431 0.3476344574461948" rpy="0.03294759939428343 0.25108473598814396 1.806373605758749"/>
+      <geometry>
+        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_pinkie_2_prt.stl" scale="0.001 0.001 0.001"/>
+      </geometry>
+    </collision>
+  </link>
+  <joint name="l_pinkie_dist" type="revolute">
+    <origin xyz="0 -0.0014997508602252463 -0.025000232410908152" rpy="3.5631170772755025e-05 -5.94559868174076e-07 -5.245059638522189e-07"/>
+    <axis xyz="-1.0000005135465095 -7.224204564889453e-07 1.88573045758339e-07"/>
+    <parent link="l_hand_pinkie_1"/>
+    <child link="l_hand_pinkie_2"/>
+    <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+   <gazebo>
+   <plugin name="controlboard_left_hand" filename="libgazebo_yarp_controlboard.so">
+     <yarpConfigurationFile>model://ergoCub/conf/gazebo_ergocub_left_hand.ini</yarpConfigurationFile>
+   </plugin>
+  </gazebo>
+
+  <gazebo>
+    <plugin name="robotinterface" filename="libgazebo_yarp_robotinterface.so">
+      <yarpRobotInterfaceConfigurationFile>model://ergoCub/conf/ergocub_left_hand.xml</yarpRobotInterfaceConfigurationFile>
+    </plugin>
+  </gazebo>
+
+</robot>

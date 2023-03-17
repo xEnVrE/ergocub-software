@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE robot PUBLIC "-//YARP//DTD yarprobotinterface 3.0//EN" "http://www.yarp.it/DTD/yarprobotinterfaceV3.0.dtd">
+
+<robot name="ergocubGazebo" build="1" portprefix="/ergocubSim" xmlns:xi="http://www.w3.org/2001/XInclude">
+    <devices>
+       <!-- MOTOR CONTROLLERS -->
+       <xi:include href="wrappers/motorControl/left_hand-mc_wrapper.xml"/>
+       <xi:include href="wrappers/motorControl/left_hand-mc_remapper.xml"/>
+    </devices>
+</robot>
