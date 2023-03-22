@@ -1,0 +1,6 @@
+-------MEASUREMENT DATA---------
+
+sim_ecub_l_hand_thumb_3_prt_standalone.stl
+
+ID : Dist [pointA][pointB]
+M0 : 36.3803 [226.831, -129.448, -223.791] [212.231, -157.576, -241.656] 
