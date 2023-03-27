@@ -252,6 +252,21 @@
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
 
+  <link name="study_center">
+    <inertial>
+      <origin xyz = "0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="-2.06718e-06" ixz="-4.99381e-07" iyy="0.01" iyz="-2.5225e-06" izz="0.01"/>
+    </inertial>
+  </link>
+  <joint name="hand_palm_study_center_joint" type="revolute">
+    <origin xyz = " 0.0220700000  0.0000000000 -0.0311400000" rpy = " 0.0000000000 -0.0000000000  0.0000000000"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <parent link="l_hand_palm"/>
+    <child link="study_center"/>
+    <limit effort="50000" lower="0.0" upper="0.0" velocity="0.0"/>
+  </joint>
+
   <link name="l_hand_thumb_1">
     <inertial>
       <origin xyz="0.020687992873158395 0.003255220723100055 -0.008896940067464165" rpy="0.3407559733652857 0.16157290397540883 2.2910827715586013"/>
