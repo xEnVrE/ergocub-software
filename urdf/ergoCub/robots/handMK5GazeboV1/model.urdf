@@ -252,10 +252,27 @@
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
 
+  <link name="l_hand_palm_shifted">
+    <inertial>
+      <origin xyz = "0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="-2.06718e-06" ixz="-4.99381e-07" iyy="0.01" iyz="-2.5225e-06" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <joint name="l_thumb_1_study_translation" type="prismatic">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 0.0 -1.0"/>
+    <parent link="l_hand_palm"/>
+    <child link="l_hand_palm_shifted"/>
+    <limit effort="50000" lower="-0.04" upper="0.04" velocity="0.1"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
   <link name="study_center">
     <inertial>
       <origin xyz = "0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
-      <mass value="1.0"/>
+      <mass value="0.1"/>
       <inertia ixx="0.01" ixy="-2.06718e-06" ixz="-4.99381e-07" iyy="0.01" iyz="-2.5225e-06" izz="0.01"/>
     </inertial>
   </link>
@@ -263,7 +280,7 @@
   <joint name="hand_palm_study_center_joint" type="revolute">
     <origin xyz = " 0.0220700000  0.0000000000 -0.0311400000" rpy = " 0.0000000000 -0.0000000000  0.0000000000"/>
     <axis xyz="1.0 0.0 0.0"/>
-    <parent link="l_hand_palm"/>
+    <parent link="l_hand_palm_shifted"/>
     <child link="study_center"/>
     <limit effort="50000" lower="0.0" upper="0.0" velocity="0.0"/>
   </joint>
@@ -294,13 +311,13 @@
   <joint name="l_thumb_add" type="revolute">
     <origin xyz="0.023374937816838005 -0.003000071417791822 -0.034523522800941175" rpy="0.08853717963934662 -0.2091803673917457 -0.40396882311318977"/>
     <axis xyz="-9.579078130705909e-08 6.90101362721407e-08 -1.0000003967894144"/>
-    <parent link="l_hand_palm"/>
+    <parent link="l_hand_palm_shifted"/>
     <child link="l_hand_thumb_1"/>
     <limit effort="50000" lower="0.0" upper="3.14" velocity="120.0"/>
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
 
-  <joint name="l_thumb_1_study_center" type="revolute">
+  <joint name="l_thumb_1_study_rotation" type="revolute">
     <origin xyz = "-0.0016246634  0.0025732007  0.0035903516" rpy = "0.0000003279 0.2268932149 0.3946688174"/>
     <axis xyz="0.0 -1.0 0.0"/>
     <parent link="l_hand_thumb_1"/>
