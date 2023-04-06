@@ -258,21 +258,7 @@
       <mass value="0.0346205"/>
       <inertia ixx="0.01" ixy="-2.06718e-06" ixz="-4.99381e-07" iyy="0.01" iyz="-2.5225e-06" izz="0.01"/>
     </inertial>
-    <visual>
-      <origin xyz="0.1322803583541615 -0.15858996430408137 0.2541102113185044" rpy="0.3407559733652857 0.16157290397540883 2.2910827715586013"/>
-      <geometry>
-        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_thumb_1_prt.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
-      <material name="red">
-        <color rgba="1 0 0 1"/>
-      </material>
-    </visual>
-    <collision>
-      <origin xyz="0.1322803583541615 -0.15858996430408137 0.2541102113185044" rpy="0.3407559733652857 0.16157290397540883 2.2910827715586013"/>
-      <geometry>
-        <mesh filename="package://ergoCub/meshes/simmechanics/sim_ecub_l_hand_thumb_1_prt.stl" scale="0.001 0.001 0.001"/>
-      </geometry>
-    </collision>
+
   </link>
 
   <link name="l_hand_thumb_1_pivot">
