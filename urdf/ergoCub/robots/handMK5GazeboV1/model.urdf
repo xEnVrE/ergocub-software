@@ -225,7 +225,7 @@
     <inertial>
       <origin xyz="5.172124499746439e-05 0.0015996341583800477 -0.003590479003163727" rpy="0.11954926259843997 0.22799029281164018 1.8531928341958708"/>
       <mass value="0.00912524"/>
-      <inertia ixx="0.01" ixy="1.239e-07" ixz="0.01" iyy="3.41731e-06" iyz="-3.99253e-07" izz="0.01"/>
+      <inertia ixx="0.01" ixy="1.239e-07" ixz="5.70823e-09" iyy="0.01" iyz="-3.99253e-07" izz="0.01"/>
     </inertial>
     <visual>
       <origin xyz="0.016178446836467256 -0.19793324107587792 0.3594559877864297" rpy="0.11954926259843997 0.22799029281164018 1.8531928341958708"/>
@@ -287,6 +287,14 @@
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
 
+  <link name="l_hand_thumb_2_down_shifter">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+  </link>
+
   <link name="l_hand_thumb_2">
     <inertial>
       <origin xyz="0.009791991208288692 0.004339703993751859 0.0002629570752250565" rpy="1.836586646685542 0.9949596465626955 -2.452146247302006"/>
@@ -310,10 +318,19 @@
     </collision>
   </link>
 
-  <joint name="l_thumb_prox" type="revolute">
+  <joint name="l_thumb_down_shifter" type="prismatic">
     <origin xyz = " 0.0343950383  0.0313018091 -0.0044737301" rpy = "3.0543263593 0.1745316748 0.6632251552"/>
-    <axis xyz="6.65068723482154e-07 -2.7824760159833595e-07 -1.0000002266902146"/>
+    <axis xyz="-1.0 0.0 0.0"/>
     <parent link="l_hand_thumb_1_pivot"/>
+    <child link="l_hand_thumb_2_down_shifter"/>
+    <limit effort="50000" lower="0.0" upper="0.03" velocity="0.1"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <joint name="l_thumb_prox" type="revolute">
+    <origin xyz = "0.0 0.0 0.0" rpy = "0.0 0.0 0.0"/>
+    <axis xyz="6.65068723482154e-07 -2.7824760159833595e-07 -1.0000002266902146"/>
+    <parent link="l_hand_thumb_2_down_shifter"/>
     <child link="l_hand_thumb_2"/>
     <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
     <dynamics damping="2.0" friction="0.0"/>
@@ -342,10 +359,27 @@
     </collision>
   </link>
 
-  <joint name="l_thumb_dist" type="revolute">
-    <origin xyz="0.01999951842714734 -0.0014995220956423305 4.0850220001109605e-07" rpy="0 0 0"/>
-    <axis xyz="6.65068723482154e-07 -2.7824760159833595e-07 -1.0000002266902146"/>
+  <link name="l_hand_thumb_2_up_shifter">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <joint name="l_thumb_shifter_coupled" type="prismatic">
+    <origin xyz="0.01999951842714734 -0.0014995220956423305 4.0850220001109605e-07" rpy="0.0 0.0 0.0"/>
+    <axis xyz="1.0 0.0 0.0"/>
     <parent link="l_hand_thumb_2"/>
+    <child link="l_hand_thumb_2_up_shifter"/>
+    <limit effort="50000" lower="0.0" upper="0.03" velocity="0.1"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <joint name="l_thumb_dist" type="revolute">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="6.65068723482154e-07 -2.7824760159833595e-07 -1.0000002266902146"/>
+    <parent link="l_hand_thumb_2_up_shifter"/>
     <child link="l_hand_thumb_3"/>
     <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
     <dynamics damping="2.0" friction="0.0"/>
