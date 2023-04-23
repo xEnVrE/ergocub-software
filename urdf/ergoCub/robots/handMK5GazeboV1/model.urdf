@@ -61,6 +61,7 @@
       </geometry>
     </collision>
   </link>
+
   <joint name="l_ring_prox" type="revolute">
     <origin xyz="-0.015417865717831492 -0.0018501027039076468 -0.09790043518642755" rpy="0 0.08726650590388031 0.026179823381597748"/>
     <axis xyz="-1.0000005135466863 -1.979209419246744e-07 -4.060128685548503e-07"/>
@@ -69,6 +70,23 @@
     <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
+
+  <link name="l_hand_ring_1_shifter">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="l_hand_ring_2_shifter">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+  </link>
+
   <link name="l_hand_ring_2">
     <inertial>
       <origin xyz="5.158639613811293e-05 0.0015996223776358065 -0.003590597740307344" rpy="0.03293841693450851 0.2510502277214382 1.8063707999903837"/>
@@ -91,12 +109,31 @@
       </geometry>
     </collision>
   </link>
-  <joint name="l_ring_dist" type="revolute">
+
+  <joint name="l_ring_1_shifter" type="prismatic">
     <origin xyz="0 -0.0014999206015293143 -0.03000056411131863" rpy="0 0 0"/>
-    <axis xyz="-1.0000005135466863 -1.979209419246744e-07 -4.060128685548503e-07"/>
+    <axis xyz="0.0 0.0 -1.0"/>
     <parent link="l_hand_ring_1"/>
-    <child link="l_hand_ring_2"/>
+    <child link="l_hand_ring_1_shifter"/>
+    <limit effort="50000" lower="0.0" upper="0.05" velocity="0.1"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <joint name="l_ring_dist" type="revolute">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="-1.0000005135466863 -1.979209419246744e-07 -4.060128685548503e-07"/>
+    <parent link="l_hand_ring_1_shifter"/>
+    <child link="l_hand_ring_2_shifter"/>
     <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <joint name="l_ring_2_shifter" type="prismatic">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 0.0 -1.0"/>
+    <parent link="l_hand_ring_2_shifter"/>
+    <child link="l_hand_ring_2"/>
+    <limit effort="50000" lower="0.0" upper="0.05" velocity="0.1"/>
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
 
@@ -122,6 +159,7 @@
       </geometry>
     </collision>
   </link>
+
   <joint name="l_index_add" type="revolute">
     <origin xyz="0.022469969224748403 -0.001550029846802109 -0.06859012009285947" rpy="0 -0.08726657030232389 2.273729335436677e-07"/>
     <axis xyz="-3.992524267790176e-07 -0.999999978353397 -2.1441989261905547e-07"/>
@@ -130,6 +168,7 @@
     <limit effort="50000" lower="0.0" upper="3.14" velocity="120.0"/>
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
+
   <link name="l_hand_index_2">
     <inertial>
       <origin xyz="0.00014299124504029564 0.003642127156679803 -0.014330898644830947" rpy="0.20567444929844825 0.20467244819585653 1.8717733650332327"/>
@@ -152,6 +191,7 @@
       </geometry>
     </collision>
   </link>
+
   <joint name="l_index_prox" type="revolute">
     <origin xyz="0.009192549743036973 -1.6307953948357934e-07 -0.030713623202012375" rpy="0 0 0"/>
     <axis xyz="-0.9999995872902697 2.6872936789712476e-07 -4.668360350512657e-07"/>
@@ -160,6 +200,23 @@
     <limit effort="50000" lower="0.0" upper="3.14" velocity="120.0"/>
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
+
+  <link name="l_hand_index_2_shifter">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="l_hand_index_3_shifter">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+  </link>
+
   <link name="l_hand_index_3">
     <inertial>
       <origin xyz="5.9109449817802695e-05 0.0016001193440265127 -0.003591033160222079" rpy="0.20567444929844825 0.20467244819585653 1.8717733650332327"/>
@@ -182,12 +239,31 @@
       </geometry>
     </collision>
   </link>
-  <joint name="l_index_dist" type="revolute">
+
+  <joint name="l_index_2_shifter" type="prismatic">
     <origin xyz="0 -0.0015006327879180659 -0.02999922319857601" rpy="0 0 0"/>
-    <axis xyz="-0.9999995872902697 2.6872936789712476e-07 -4.668360350512657e-07"/>
+    <axis xyz="0.0 0.0 -1.0"/>
     <parent link="l_hand_index_2"/>
-    <child link="l_hand_index_3"/>
+    <child link="l_hand_index_2_shifter"/>
+    <limit effort="50000" lower="0.0" upper="0.05" velocity="0.1"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <joint name="l_index_dist" type="revolute">
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+    <axis xyz="-0.9999995872902697 2.6872936789712476e-07 -4.668360350512657e-07"/>
+    <parent link="l_hand_index_2_shifter"/>
+    <child link="l_hand_index_3_shifter"/>
     <limit effort="50000" lower="0.0" upper="3.14" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <joint name="l_index_3_shifter" type="prismatic">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 0.0 -1.0"/>
+    <parent link="l_hand_index_3_shifter"/>
+    <child link="l_hand_index_3"/>
+    <limit effort="50000" lower="0.0" upper="0.05" velocity="0.1"/>
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
 
@@ -213,6 +289,7 @@
       </geometry>
     </collision>
   </link>
+
   <joint name="l_middle_prox" type="revolute">
     <origin xyz="0.009600214668670098 -0.0015008571910165858 -0.10299987654370085" rpy="0 0 0"/>
     <axis xyz="-0.9999998262416893 -3.56920377206707e-07 -2.721582535170075e-07"/>
@@ -221,6 +298,23 @@
     <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
+
+  <link name="l_hand_middle_1_shifter">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="l_hand_middle_2_shifter">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+  </link>
+
   <link name="l_hand_middle_2">
     <inertial>
       <origin xyz="5.172124499746439e-05 0.0015996341583800477 -0.003590479003163727" rpy="0.11954926259843997 0.22799029281164018 1.8531928341958708"/>
@@ -243,12 +337,31 @@
       </geometry>
     </collision>
   </link>
-  <joint name="l_middle_dist" type="revolute">
+
+  <joint name="l_middle_1_shifter" type="prismatic">
     <origin xyz="-1.3550151000546462e-07 -0.0014995238274964628 -0.03000020325318492" rpy="-0.0018721728628663644 0 2.576685250299645e-07"/>
-    <axis xyz="-0.9999998262417538 -9.878318872787173e-08 -2.5044776373606137e-07"/>
+    <axis xyz="0.0 0.0 -1.0"/>
     <parent link="l_hand_middle_1"/>
-    <child link="l_hand_middle_2"/>
+    <child link="l_hand_middle_1_shifter"/>
+    <limit effort="50000" lower="0.0" upper="0.05" velocity="0.1"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <joint name="l_middle_dist" type="revolute">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="-0.9999998262417538 -9.878318872787173e-08 -2.5044776373606137e-07"/>
+    <parent link="l_hand_middle_1_shifter"/>
+    <child link="l_hand_middle_2_shifter"/>
     <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <joint name="l_middle_2_shifter" type="prismatic">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 0.0 -1.0"/>
+    <parent link="l_hand_middle_2_shifter"/>
+    <child link="l_hand_middle_2"/>
+    <limit effort="50000" lower="0.0" upper="0.05" velocity="0.1"/>
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
 
@@ -407,6 +520,7 @@
       </geometry>
     </collision>
   </link>
+
   <joint name="l_pinkie_prox" type="revolute">
     <origin xyz="-0.03598224264195511 -0.002388684875026248 -0.09208535104881393" rpy="0 0.08726650590388031 0.026179823381597748"/>
     <axis xyz="-1.0000005135466863 -1.979209419246744e-07 -4.060128685548503e-07"/>
@@ -415,6 +529,23 @@
     <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
+
+  <link name="l_hand_pinkie_1_shifter">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+  </link>
+
+  <link name="l_hand_pinkie_2_shifter">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+  </link>
+
   <link name="l_hand_pinkie_2">
     <inertial>
       <origin xyz="1.712559800553376e-05 0.0017852152950040279 -0.005612274232820069" rpy="0.03294759939428343 0.25108473598814396 1.806373605758749"/>
@@ -437,12 +568,31 @@
       </geometry>
     </collision>
   </link>
-  <joint name="l_pinkie_dist" type="revolute">
+
+  <joint name="l_pinkie_1_shifter" type="prismatic">
     <origin xyz="0 -0.0014997508602252463 -0.025000232410908152" rpy="3.5631170772755025e-05 -5.94559868174076e-07 -5.245059638522189e-07"/>
-    <axis xyz="-1.0000005135465095 -7.224204564889453e-07 1.88573045758339e-07"/>
+    <axis xyz="0.0 0.0 -1.0"/>
     <parent link="l_hand_pinkie_1"/>
-    <child link="l_hand_pinkie_2"/>
+    <child link="l_hand_pinkie_1_shifter"/>
+    <limit effort="50000" lower="0.0" upper="0.05" velocity="0.1"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <joint name="l_pinkie_dist" type="revolute">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="-1.0000005135465095 -7.224204564889453e-07 1.88573045758339e-07"/>
+    <parent link="l_hand_pinkie_1_shifter"/>
+    <child link="l_hand_pinkie_2_shifter"/>
     <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <joint name="l_pinkie_2_shifter" type="prismatic">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="0.0 0.0 -1.0"/>
+    <parent link="l_hand_pinkie_2_shifter"/>
+    <child link="l_hand_pinkie_2"/>
+    <limit effort="50000" lower="0.0" upper="0.05" velocity="0.1"/>
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
 
