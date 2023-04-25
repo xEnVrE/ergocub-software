@@ -457,6 +457,14 @@
     </inertial>
   </link>
 
+  <link name="l_hand_thumb_3_shifter">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="0.1"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+  </link>
+
   <link name="l_hand_thumb_3">
     <inertial>
       <origin xyz="0.006464657686845246 0.001884491656128695 1.5530289565829358e-05" rpy="1.836586646685542 0.9949596465626955 -2.452146247302006"/>
@@ -485,7 +493,7 @@
     <axis xyz="1.0 0.0 0.0"/>
     <parent link="l_hand_thumb_2"/>
     <child link="l_hand_thumb_2_shifter"/>
-    <limit effort="50000" lower="0.0" upper="0.03" velocity="0.1"/>
+    <limit effort="50000" lower="0.0" upper="0.05" velocity="0.1"/>
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
 
@@ -493,8 +501,17 @@
     <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
     <axis xyz="6.65068723482154e-07 -2.7824760159833595e-07 -1.0000002266902146"/>
     <parent link="l_hand_thumb_2_shifter"/>
-    <child link="l_hand_thumb_3"/>
+    <child link="l_hand_thumb_3_shifter"/>
     <limit effort="50000" lower="0.0" upper="2.792526803190927" velocity="120.0"/>
+    <dynamics damping="2.0" friction="0.0"/>
+  </joint>
+
+  <joint name="l_thumb_3_shifter" type="prismatic">
+    <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+    <axis xyz="1.0 0.0 0.0"/>
+    <parent link="l_hand_thumb_3_shifter"/>
+    <child link="l_hand_thumb_3"/>
+    <limit effort="50000" lower="0.0" upper="0.05" velocity="0.1"/>
     <dynamics damping="2.0" friction="0.0"/>
   </joint>
 
