@@ -1,0 +1,126 @@
+<?xml version="1.0" ?>
+
+<sdf version="1.7">
+  <world name="default">
+
+    <!-- Global source light -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+
+    <!-- Tabletop light source -->
+    <!-- <light name='user_point_light_0' type='point'> -->
+    <!--     <pose frame=''>0.197302 -0.215077 1 0 -0 0</pose> -->
+    <!--     <diffuse>0.5 0.5 0.5 1</diffuse> -->
+    <!--     <specular>0.1 0.1 0.1 1</specular> -->
+    <!--     <attenuation> -->
+    <!--       <range>20</range> -->
+    <!--       <constant>0.5</constant> -->
+    <!--       <linear>0.01</linear> -->
+    <!--       <quadratic>0.001</quadratic> -->
+    <!--     </attenuation> -->
+    <!--     <cast_shadows>0</cast_shadows> -->
+    <!--     <direction>0 0 -1</direction> -->
+    <!-- </light> -->
+
+    <!-- World state -->
+    <state world_name='default'>
+
+      <light name='sun'>
+        <pose frame=''>0 0 10 0 -0 3.14</pose>
+      </light>
+
+      <!-- <light name='user_point_light_0'> -->
+      <!--   <pose frame=''>0.197302 -0.215077 1 0 -0 0</pose> -->
+      <!-- </light> -->
+    </state>
+
+    <!-- Ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+
+    <!-- ergoCub hand  -->
+  <model name="ergocub_fixed">
+    <include>
+      <uri>model://handMK5GazeboV1</uri>
+      <pose>0.0 0 1.0 0 0 1.57</pose>
+    </include>
+
+    <joint name="fixed_base" type="fixed">
+      <parent>world</parent>
+      <child>ergoCub::root_link</child>
+    </joint>
+  </model>
+
+  <model name="object_011_banana">
+    <plugin name="model_mover" filename="librobots-plugins-model-mover.so"></plugin>
+    <include>
+      <uri>model://011_banana</uri>
+      <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+      <static>true</static>
+    </include>
+  </model>
+
+  <model name="object_025_mug">
+    <plugin name="model_mover" filename="librobots-plugins-model-mover.so"></plugin>
+    <include>
+      <uri>model://025_mug</uri>
+      <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+      <static>true</static>
+    </include>
+  </model>
+
+  <model name="object_019_pitcher_base">
+    <plugin name="model_mover" filename="librobots-plugins-model-mover.so"></plugin>
+    <include>
+      <uri>model://019_pitcher_base</uri>
+      <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+      <static>true</static>
+    </include>
+  </model>
+
+  <model name="object_003_cracker_box">
+    <plugin name="model_mover" filename="librobots-plugins-model-mover.so"></plugin>
+    <include>
+      <uri>model://003_cracker_box</uri>
+      <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+      <static>true</static>
+    </include>
+  </model>
+
+  <model name="object_006_mustard_bottle">
+    <plugin name="model_mover" filename="librobots-plugins-model-mover.so"></plugin>
+    <include>
+      <uri>model://006_mustard_bottle</uri>
+      <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+      <static>true</static>
+    </include>
+  </model>
+
+  <model name="object_010_potted_meat_can">
+    <plugin name="model_mover" filename="librobots-plugins-model-mover.so"></plugin>
+    <include>
+      <uri>model://010_potted_meat_can</uri>
+      <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+      <static>true</static>
+    </include>
+  </model>
+
+  <scene>
+    <shadows>0</shadows>
+    <ambient>0.4 0.4 0.4 1</ambient>
+    <background>0.7 0.7 0.7 1</background>
+  </scene>
+
+  <!-- default camera -->
+  <gui fullscreen='0'>
+    <camera name='user_camera'>
+      <pose>-1.98324 -1.29224 1.41378 0 0.319643 0.448195</pose>
+      <view_controller>orbit</view_controller>
+      <projection_type>perspective</projection_type>
+    </camera>
+  </gui>
+
+  </world>
+</sdf>
