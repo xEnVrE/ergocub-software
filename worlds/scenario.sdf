@@ -80,6 +80,24 @@
     </include>
   </model>
 
+  <model name="object_005_tomato_soup_can">
+    <plugin name="model_mover" filename="librobots-plugins-model-mover.so"></plugin>
+    <include>
+      <uri>model://005_tomato_soup_can</uri>
+      <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+      <static>true</static>
+    </include>
+  </model>
+
+  <model name="object_035_power_drill">
+    <plugin name="model_mover" filename="librobots-plugins-model-mover.so"></plugin>
+    <include>
+      <uri>model://035_power_drill</uri>
+      <pose>0.0 0.0 0.0 0.0 0.0 0.0</pose>
+      <static>true</static>
+    </include>
+  </model>
+
   <model name="object_003_cracker_box">
     <plugin name="model_mover" filename="librobots-plugins-model-mover.so"></plugin>
     <include>
