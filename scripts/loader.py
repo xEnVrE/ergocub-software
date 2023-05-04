@@ -1,6 +1,7 @@
 import argparse
 import numpy
 import pickle
+import time
 import yarp
 from map import JointsMap
 from pathlib import Path
@@ -89,8 +90,8 @@ class Demo():
         ports_pose_out = {}
         for name in list_objects:
             ports_pose_out[name] = yarp.Port()
-            ports_pose_out[name].open('/' + prefix + '/object_' + name + 'model_mover/pose:o')
-            yarp.Network.connect('/' + prefix + '/object_' + name + 'model_mover/pose:o', '/object_' + name + '/model-mover/pose:i/transform:i')
+            ports_pose_out[name].open('/' + prefix + '/object_' + name + '/model_mover/pose:o')
+            yarp.Network.connect('/' + prefix + '/object_' + name + '/model_mover/pose:o', '/object_' + name + '/model-mover/pose:i/transform:i')
 
         # Helper
         def move_object_to(port, pose):
@@ -101,9 +102,25 @@ class Demo():
 
             port.write(pose_yarp)
 
-        port = ports_pose_out[args.object_name]
+        # Restore the object considered by this configuration
+        port = ports_pose_out[database[args.cfg_name]['object_name']]
         pose = database[args.cfg_name]['object_pose']
-        move_object_to(port, pose)
+        t0 = time.time()
+        while (time.time() - t0) < 0.1:
+            move_object_to(port, pose)
+
+        # Move to identity all the other objects
+        for name in list_objects:
+            if database[args.cfg_name]['has_object'] and \
+               name == database[args.cfg_name]['object_name']:
+                continue
+
+            pose_zero = numpy.zeros(7)
+            pose_zero[3] = 1.0
+            port = ports_pose_out[name]
+            t0 = time.time()
+            while (time.time() - t0) < 0.1:
+                move_object_to(port, pose_zero)
 
 
 if __name__ == '__main__':
