@@ -1,0 +1,16 @@
+<robot name="010_potted_meat_can">
+
+  <link name="root_link">
+    <inertial>
+      <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+      <mass value="1.0"/>
+      <inertia ixx="0.01" ixy="-1.66069e-05" ixz="2.22683e-05" iyy="0.01" iyz="6.67926e-06" izz="0.01"/>
+    </inertial>
+    <visual>
+      <geometry>
+        <mesh filename="package://objects_package/meshes/YCB_Video_Models/models/010_potted_meat_can/textured_simple.obj" />
+      </geometry>
+    </visual>
+  </link>
+
+</robot>
