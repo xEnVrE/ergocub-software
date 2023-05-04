@@ -11,6 +11,8 @@ class Demo():
 
     def __init__(self, args):
 
+        prefix = 'demo'
+
         yarp.Network.init()
 
         if not Path('./database.pickle').exists():
@@ -20,6 +22,48 @@ class Demo():
         database = None
         with open('./database.pickle', 'rb') as f:
             database = pickle.load(f)
+
+        # List of objects to be moved
+        list_objects = ['011_banana', '006_mustard_bottle', '010_potted_meat_can', '003_cracker_box']
+
+        # Port to send the new object poses to
+        ports_pose_out = {}
+        for name in list_objects:
+            ports_pose_out[name] = yarp.Port()
+            ports_pose_out[name].open('/' + prefix + '/object_' + name + '/model_mover/pose:o')
+            yarp.Network.connect('/' + prefix + '/object_' + name + '/model_mover/pose:o', '/object_' + name + '/model-mover/pose:i/transform:i')
+
+        # Helper
+        def move_object_to(port, pose):
+
+            pose_yarp = yarp.Vector(pose.shape[0])
+            for i in range(pose.shape[0]):
+                pose_yarp[i] = pose[i]
+
+            port.write(pose_yarp)
+
+        # Restore the object considered by this configuration
+        if database[args.cfg_name]['has_object']:
+            port = ports_pose_out[database[args.cfg_name]['object_name']]
+            pose = database[args.cfg_name]['object_pose']
+            t0 = time.time()
+            while (time.time() - t0) < 0.1:
+                move_object_to(port, pose)
+
+        # Move to identity all the other objects
+        for name in list_objects:
+            if database[args.cfg_name]['has_object'] and \
+               name == database[args.cfg_name]['object_name']:
+                continue
+
+            pose_zero = numpy.zeros(7)
+            pose_zero[0] = 100.0
+            pose_zero[1] = 100.0
+            pose_zero[3] = 1.0
+            port = ports_pose_out[name]
+            t0 = time.time()
+            while (time.time() - t0) < 0.1:
+                move_object_to(port, pose_zero)
 
         map = JointsMap()
 
@@ -45,7 +89,6 @@ class Demo():
             joints[i] = map.joints_map[name]
 
         # Prepare a property object
-        prefix = 'demo'
         props = yarp.Property()
         props.put('device','remote_controlboard')
         props.put('local','/' + prefix + '/left_arm')
@@ -82,46 +125,6 @@ class Demo():
 
         # Close the driver
         arm_driver.close()
-
-        # List of objects to be moved
-        list_objects = ['011_banana', '006_mustard_bottle', '010_potted_meat_can']
-
-        # Port to send the new object poses to
-        ports_pose_out = {}
-        for name in list_objects:
-            ports_pose_out[name] = yarp.Port()
-            ports_pose_out[name].open('/' + prefix + '/object_' + name + '/model_mover/pose:o')
-            yarp.Network.connect('/' + prefix + '/object_' + name + '/model_mover/pose:o', '/object_' + name + '/model-mover/pose:i/transform:i')
-
-        # Helper
-        def move_object_to(port, pose):
-
-            pose_yarp = yarp.Vector(pose.shape[0])
-            for i in range(pose.shape[0]):
-                pose_yarp[i] = pose[i]
-
-            port.write(pose_yarp)
-
-        # Restore the object considered by this configuration
-        if database[args.cfg_name]['has_object']:
-            port = ports_pose_out[database[args.cfg_name]['object_name']]
-            pose = database[args.cfg_name]['object_pose']
-            t0 = time.time()
-            while (time.time() - t0) < 0.1:
-                move_object_to(port, pose)
-
-        # Move to identity all the other objects
-        for name in list_objects:
-            if database[args.cfg_name]['has_object'] and \
-               name == database[args.cfg_name]['object_name']:
-                continue
-
-            pose_zero = numpy.zeros(7)
-            pose_zero[3] = 1.0
-            port = ports_pose_out[name]
-            t0 = time.time()
-            while (time.time() - t0) < 0.1:
-                move_object_to(port, pose_zero)
 
 
 if __name__ == '__main__':
