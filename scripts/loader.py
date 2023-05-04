@@ -103,11 +103,12 @@ class Demo():
             port.write(pose_yarp)
 
         # Restore the object considered by this configuration
-        port = ports_pose_out[database[args.cfg_name]['object_name']]
-        pose = database[args.cfg_name]['object_pose']
-        t0 = time.time()
-        while (time.time() - t0) < 0.1:
-            move_object_to(port, pose)
+        if database[args.cfg_name]['has_object']:
+            port = ports_pose_out[database[args.cfg_name]['object_name']]
+            pose = database[args.cfg_name]['object_pose']
+            t0 = time.time()
+            while (time.time() - t0) < 0.1:
+                move_object_to(port, pose)
 
         # Move to identity all the other objects
         for name in list_objects:
