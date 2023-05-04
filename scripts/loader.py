@@ -24,7 +24,7 @@ class Demo():
             database = pickle.load(f)
 
         # List of objects to be moved
-        list_objects = ['011_banana', '006_mustard_bottle', '010_potted_meat_can', '003_cracker_box', '025_mug', '019_pitcher_base']
+        list_objects = ['011_banana', '006_mustard_bottle', '010_potted_meat_can', '003_cracker_box', '025_mug', '019_pitcher_base', '005_tomato_soup_can', '035_power_drill']
 
         # Port to send the new object poses to
         ports_pose_out = {}
